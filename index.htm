@@ -1,0 +1,60 @@
+<html>
+
+<head>
+<title>Equipmentless Workout Generator</title>
+<script type="text/javascript">
+
+var excercises = ["Jumping jacks",
+"Burpees",
+"Crunches",
+"Pushups",
+"Diamond pushups",
+"Hindu pushups",
+"Dips",
+"Squats",
+"Lunges",
+"Mountain climbers",
+"Superman",
+"Flutter kick",
+"Bicycle",
+"Russian twists",
+"Squat jumps"];
+
+var workoutType = ["In 15 minutes do as many sets as you can:", "Do 10 sets of:"];
+
+function range(max, min, step) {
+  return Math.round((((Math.random() * 1000) % (max + 1 - min)) + min)/step) * step;
+}
+
+function choose(arr) {
+  return arr[Math.floor(Math.random() * 1000 % arr.length)]
+}
+
+function generateWorkout() {
+  var maxExcercise = 6;
+  var minExcercise = 3;
+  var numExcercise = range(maxExcercise, minExcercise, 1);
+  var maxReps = 20;
+  var minReps = 5;
+  var repStep = 5;
+
+  var workout = choose(workoutType) + "<br />";
+  var i;
+  for (i = 0; i < numExcercise; ++i) {
+    var reps = range(maxReps, minReps, repStep);
+    workout += reps + " " + choose(excercises) + "<br />";
+  }
+
+  document.getElementById("workout").innerHTML = workout;
+}
+
+</script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body onload="generateWorkout()">
+
+<h1>Equipmentless Workout Generator</h1>
+<button type="button" class="btn btn-default" onclick="generateWorkout()">Generate New Workout</button>
+<div id="workout"></div>
+</body>
+</html>
