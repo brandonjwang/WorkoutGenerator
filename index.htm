@@ -27,7 +27,7 @@ function range(max, min, step) {
 }
 
 function choose(arr) {
-  return arr[Math.floor(Math.random() * 1000 % arr.length)]
+  return arr[range(arr.length, 0, 1)]
 }
 
 function generateWorkout() {
