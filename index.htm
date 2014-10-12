@@ -20,32 +20,41 @@ var excercises = ["Jumping jacks",
 "Russian twists",
 "Squat jumps"];
 
-var workoutType = ["In 15 minutes do as many sets as you can:", "Do 10 sets of:"];
+var workoutType = [
+  {title: "In 15 minutes do as many sets as you can:",
+   minRep: 5,
+   maxRep: 20,
+   minEx: 3,
+   maxEx: 5}, 
+  {title: "Do 10 sets of:",
+   minRep: 5,
+   maxRep: 20,
+   minEx: 3,
+   maxEx: 5},
+  {title: "Do the following once:",
+   minRep: 10,
+   maxRep: 60,
+   minEx: 5,
+   maxEx: 10}]
 
 function range(max, min, step) {
-  return Math.round((((Math.random() * 1000) % (max + 1 - min)) + min)/step) * step;
+  return Math.round((((Math.random() * 1000) % (max - min)) + min)/step) * step;
 }
 
 function choose(arr) {
-  return arr[range(arr.length - 1, 0, 1)]
+  return arr[range(arr.length - 1, 0, 1)];
 }
 
 function generateWorkout() {
-  var maxExcercise = 5;
-  var minExcercise = 3;
-  var numExcercise = range(maxExcercise, minExcercise, 1);
-  var maxReps = 20;
-  var minReps = 5;
-  var repStep = 5;
-
-  var workout = choose(workoutType) + "<br />";
+  var workout = choose(workoutType);
+  var workoutText = workout.title + "<br />";
   var i;
-  for (i = 0; i < numExcercise; ++i) {
-    var reps = range(maxReps, minReps, repStep);
-    workout += reps + " " + choose(excercises) + "<br />";
+  for (i = 0; i < range(workout.maxEx, workout.minEx, 1); ++i) {
+    var reps = range(workout.maxRep, workout.minRep, 5);
+    workoutText += reps + " " + choose(excercises) + "<br />";
   }
 
-  document.getElementById("workout").innerHTML = workout;
+  document.getElementById("workout").innerHTML = workoutText;
 }
 
 </script>
