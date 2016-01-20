@@ -49,9 +49,18 @@ function generateWorkout() {
   var workout = choose(workoutType);
   var workoutText = workout.title + "<br />";
   var i;
+  var doneExcercises = [];
   for (i = 0; i < range(workout.maxEx, workout.minEx, 1); ++i) {
     var reps = range(workout.maxRep, workout.minRep, 5);
-    workoutText += reps + " " + choose(excercises) + "<br />";
+    var excercise = null;
+    while(excercise == null) {
+      excercise = choose(excercises);
+      if (doneExcercises.indexOf(excercise) != -1) {
+        excercise = null;
+      }
+      doneExcercises.push(excercise);
+    }
+    workoutText += reps + " " + excercise + "<br />";
   }
 
   document.getElementById("workout").innerHTML = workoutText;
